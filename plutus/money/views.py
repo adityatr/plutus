@@ -64,7 +64,7 @@ def get_banks(request):
                 ret["bank" + str(x.id)]['credit'] = str(x.credit)
                 ret["bank" + str(x.id)]['debit'] = str(x.debit)
             return HttpResponse(json.dumps(ret))
-            
+    return HttpResponse(status=500)
     
             
             
