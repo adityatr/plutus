@@ -12,6 +12,9 @@ def auth(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return HttpResponse("1")
+            return HttpResponse(request.session.session_key)
     else:
-        return HttpResponse("0")
+        return HttpResponse(status=500)
+        
+def whoami(request):
+    return HttpResponse(request.user.username)

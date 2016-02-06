@@ -47,3 +47,17 @@ class Transaction(models.Model):
     merchantName = models.CharField(max_length=30)
     status = models.CharField(max_length=15)
     accountID = models.IntegerField(default=0)
+    
+class MintTransaction(models.Model):
+    
+    fk_to_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField()
+    description = models.CharField(max_length=30)
+    original_description = models.CharField(max_length=30)
+    amount = models.DecimalField(decimal_places=2, max_digits=20)
+    acc_type = models.CharField(max_length=30)
+    category = models.CharField(max_length=30)
+    acc_name = models.CharField(max_length=30)
+    
+
+    
