@@ -21,4 +21,5 @@ from . import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth$', views.auth),
+    url(r'^money/', include('money.urls')),
 ]
