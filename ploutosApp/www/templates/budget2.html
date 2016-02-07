@@ -1,0 +1,52 @@
+<ion-view view-title="Budget">
+
+    <ion-content>
+
+        <section id="modal">
+            
+            <div class="row budget-row" >
+                <div class="col">
+                    <h4>Your average monthly budget</h4>
+                    <h4>${{data.average}}</h4></div>
+                
+                <div class="col">
+                    
+                    <h4>Affordable monthly budget</h4>
+                    <h4>${{data.affordable}}</h4>
+                </div>
+            </div>
+            
+            <div class="row budget-row">
+                <div class="col">
+                    <h4>Your monthly savings</h4>
+                    <h4>${{data.average - user.value}}</h4>
+                </div>
+                <div class="col">
+                    <h4>Projected net worth (1yr)</h4>
+                    <h4>${{data.net + (data.average - user.value)*12}}</h4></div>
+            </div>
+            
+            
+            
+            
+            <div class="item range">
+                <img src="img/coins.png" height="24" width="24"/>
+                <input on-release="onRelease()" id="slider" type="range" min="0" max={{user.max}}  ng-model="user.value">
+                    <img src="img/coins.png" height="39" width="39"/>
+                    </div>
+            
+            
+            
+            
+            <div class="row budget-row" >
+                
+                <div><h4>Current budget: {{user.value}}</h4></div>
+            </div>
+            
+            
+        </section>
+
+
+    </ion-content>
+
+</ion-view>

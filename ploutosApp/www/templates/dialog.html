@@ -1,0 +1,23 @@
+<ion-view view-title="Dialog">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        
+            <ion-pane >
+                
+                <ion-header-bar frosted-bar class="bar-frosted">
+                    <h1 class="title">Blurred!</h1>
+                </ion-header-bar>
+                
+                <ion-content class="padding" start-y="120">
+                    <ol class="messages">
+                        <li ng-repeat="message in messages" ng-bind-html="message.content"></li>
+                    </ol>
+                </ion-content>
+                
+                <div class="bar bar-footer bar-balanced">
+                    <input type="text" ng-model="data.message">
+                    <button class="button button-clear button-positive" ng-click="add()">Add Message</button>
+
+                </div>
+            </ion-pane>
+</ion-view>
+

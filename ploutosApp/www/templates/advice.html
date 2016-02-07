@@ -1,0 +1,17 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Advice</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        
+        <ion-list>
+            <ion-item ng-repeat="advice in advices" href={{advice.link}} class="advice-cell">
+                {{advice.statement}} <p class="amount-saved">${{advice.number}}</p>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-modal-view>

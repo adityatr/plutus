@@ -1,0 +1,11 @@
+<ion-view view-title="My Friends">
+  <ion-content>
+
+<ion-list>
+      <ion-item ng-repeat="friend in friends" href="#/app/friends/{{friend.id}}">
+        {{friend.title}}
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

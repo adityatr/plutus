@@ -1,0 +1,119 @@
+<ion-view view-title="Friend">
+    <ion-content>
+        <h1>Friend</h1>
+        
+        <div class="spacer"></div>
+        <div class="section">
+            
+            <div class="row" id="logo-row">
+                <div class="col">
+                    <a><img src="img/owly.png" height="100" width="100"></a>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        
+        <div class="section">
+            <h3>Friend's Goals</h3>
+            <section>
+                
+                
+                <p>{{goal.title}}</p>
+                
+                
+                <!--                <div class="progress" id="balance">-->
+                <!--                    <div class="progress-bar progress-bar-success pos" style={{pos_percent}}>-->
+                <!--                        ${{pos}}</div>-->
+                <!--                    <div class="progress-bar progress-bar-warning progress-bar neg" style={{neg_percent}}>-->
+                <!--                        ${{neg}}-->
+                <!--                    </div>-->
+                <!--                    -->
+                <!--                </div>-->
+                <!--                -->
+                <!--                -->
+                <!--                <div class="progress" id="balance">-->
+                <!--                    <div class="progress-bar progress-bar-success pos" style={{pos_progress}}>-->
+                <!--                        ${{pos}}</div>-->
+                <!--                    <div class="progress-bar progress-bar-warning progress-bar neg" style={{neg_progress}}>-->
+                <!--                        ${{neg}}-->
+                <!--                    </div>-->
+                <!--                    -->
+                <!--                </div>-->
+                <!--                -->
+                <!--                <div class="progress" id="balance">-->
+                <!--                    <div class="progress-bar progress-bar-success pos" style={{pos_progress}}>-->
+                <!--                        ${{pos}}</div>-->
+                <!--                    <div class="progress-bar progress-bar-warning progress-bar neg" style={{neg_progress}}>-->
+                <!--                        ${{neg}}-->
+                <!--                    </div>-->
+                <!--                    -->
+                <!--                </div>-->
+                
+                
+                <div class="section" id="goals">
+                    <h3>Goals</h3>
+                    <div class="row">
+                        
+                        <div class="col" ng-repeat="goal in goals">
+                            
+                            <p>{{goal.title}}</p>
+                            
+                            <canvas id="pie" class="chart chart-doughnut"
+                                chart-data="data1" chart-labels="labels1">
+                            </canvas>
+                            
+                            <div class="donut-inner">
+                                <h4>47k / 60k </h4>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    </section>
+            <div class="spacer"></div>
+            
+            <section>
+                <div class="row" id="friend-buttons">
+                    <div class="col">
+                        <img src="img/msg.png" height="90" width="90"/>
+                    </div>
+                    <div class="col">
+                        <img src="img/group.png" height="90" width="90"/>
+                    </div>
+                </div>
+                
+                
+            </section>
+            <div class="spacer"></div>
+            <section>
+                <h3>Recent updates</h3>
+                
+                <ion-list>
+                    <ion-item ng-repeat="update in updates">
+                        {{update.title}}
+                    </ion-item>
+                </ion-list>
+                
+                
+                
+                
+            </section>
+            
+            
+            
+            
+            
+            
+        </div>
+        
+        
+        
+        </div>
+        </div>
+        
+        </div>
+        
+        
+    </ion-content>
+</ion-view>

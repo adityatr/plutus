@@ -1,0 +1,26 @@
+<ion-view view-title=" New-login" name="login-view">
+  <ion-content class="padding">
+      <div class="spacer"></div>
+
+      <div class="row" id="logo-row">
+          <div class="col">
+              <a><img src="img/owly.png" height="100" width="100"></a>
+              
+          </div>
+      </div>
+      <div class="spacer"></div>
+      
+      <div class="list list-inset">
+          <label class="item item-input">
+              <input type="text" placeholder="Username" ng-model="data.username">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Password" ng-model="data.password">
+          </label>
+
+      </div>
+      <button href="#/app/search" class="button button-block button-calm" ng-click="login()">Login</button>
+
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,161 @@
+
+
+
+<ion-side-menus enable-menu-with-back-views="false">
+    
+    
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                    
+                    <!--                <button class="button  button-clear" menu-toggle="left">-->
+                    <!--            <img src="img/pig.png" height="30" width="30"/>-->
+                    
+                </button>
+            </ion-nav-buttons>
+            
+            <ion-nav-buttons side="right">
+                <!--                <button class="button button-icon button-clear ion-navicon" menu-toggle="right">-->
+                
+                <button class="button  button-clear" menu-toggle="right">
+                    <img src="img/social.png" height="30" width="30"/>
+                    
+                    
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    
+    <ion-side-menu side="left">
+        <ion-header-bar class="bar-stable">
+            <h1 class="title">Overview</h1>
+        </ion-header-bar>
+        <ion-content>
+            <ion-list>
+                <ion-item menu-close href="#/app/main" class="sidebar-cell">
+                    <img style="display:inline;" src="img/safe.png" height="25" width="25"/>
+                    <h3>Home</h3>
+                </ion-item>
+                <ion-item menu-close href="#/app/alerts" class="sidebar-cell">
+                    <img style="display:inline;" src="img/alert.png" height="25" width="25"/>
+                    
+                    <h3>Alerts</h3>
+                    <ion-list class="sidebar-alerts">
+                        <ion-item ng-repeat="alert in alerts" href="#/app/alerts/{{alert.id}}" class="sidebar-alert">
+                            <p>{{alert.title}}</p>{{alert.due}}
+                        </ion-item>
+                    </ion-list>
+                </ion-item>
+                
+                <ion-item menu-close class="sidebar-cell">
+                    <img style="display:inline;" src="img/cards.png" height="25" width="25"/>
+                    <h3 style="display:inline; margin-left: 4px;">My Accounts</h3>
+                    <ion-list class="sidebar-alerts">
+                        <ion-item ng-repeat="account in accounts" href="#/app/accounts/{{account.id}}" class="sidebar-alert">
+                            <p>{{account.title}}</p> ${{account.balance}}
+                        </ion-item>
+                        <div class="item item-divider">
+                            <b>Net Worth:</b> ${{sum}}
+                            </div
+                            </ion-list>
+                            </ion-item>
+                
+                <ion-item menu-close href="#/app/alerts" class="sidebar-cell">
+                    <img style="display:inline;" src="img/bill.png" height="25" width="25"/>
+                    
+                    <h3>Upcoming Bills</h3>
+                    <ion-list class="sidebar-alerts">
+                        <ion-item ng-repeat="account in accounts" href="#/app/accounts/{{account.id}}" class="sidebar-alert">
+                            {{account.title}}
+                        </ion-item>
+                    </ion-list>
+                </ion-item>
+                
+<!--                <ion-item ng-click="showModal()" menu-close class="sidebar-cell" href="#/app/budget">-->
+                    <ion-item ng-click="openModal()" menu-close class="sidebar-cell">
+
+                    <h3>Remaining budget</h3>
+                    <div class="progress budget-bar" >
+                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                            $3220
+                        </div>
+                    </div>
+                </ion-item>
+                
+                <ion-item menu-close class="sidebar-cell">
+                    <h3>Categories</h3>
+                    <div id="canvas-holder">
+                        <canvas id="pie" class="chart chart-pie"
+                            chart-data="datas" chart-labels="labels" chart-legend="true">
+                        </canvas>                    </div>
+                </ion-item>
+                
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+    
+    <ion-side-menu side="right">
+        <ion-header-bar class="bar-stable">
+            <h1 class="title">Social</h1>
+        </ion-header-bar>
+        <ion-content>
+            <ion-list>
+                <ion-item menu-close href="#/app/friends">
+                    <h3>Top Friends</h3>
+                    <ion-list class="sidebar-alerts">
+                        
+                        <ion-item ng-repeat="friend in friends" href="#/app/friends/{{friend.id}}" class="sidebar-friend">
+                            
+                            {{friend.name}}<b><p>{{friend.score}}</p></b>
+                            
+                        </ion-item>
+                        
+                        
+                    </ion-list>
+                </ion-item>
+                <ion-item menu-close href="#/app/achievements">
+                    <div><h3>My Achievements</h3></div>
+                    <div class="row" id="achieve">
+                        <div class="col">
+                            
+                            <img src="img/a1.png" height="40" width="40"/>
+                        </div>
+                        
+                        
+                        <div class="col">
+                            
+                            <img src="img/a2.png" height="40" width="40"/>
+            
+                        </div>
+
+                            <div class="col">
+                                
+                                <img src="img/a3.png" height="40" width="40"/>
+                            </div>
+                            
+                        </div>
+                        </ion-item>
+                
+                <ion-item menu-close href="#/app/alerts">
+                    <h3>Community Trends</h3>
+                    <ion-list class="sidebar-alerts">
+                        <p style="height: 100px; width: 200px; text-aligh: center">
+                        The lorem ipsum text is typically a scrambled section of De finibus bonorum et malorum, a 1st-century BC Latin text by Cicero, with words altered, added, and removed to make it nonsensical, improper Latin.
+                        </p>
+                    </ion-list>
+                </ion-item>
+                
+                
+                
+            </ion-list>
+        </ion-content>    </ion-side-menu>
+</ion-side-menus>

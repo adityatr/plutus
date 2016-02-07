@@ -1,0 +1,63 @@
+<ion-view view-title="Home">
+    <ion-content>
+        
+        
+        
+        
+        <div class="spacer"></div>
+        <div class="section">
+            
+            <div class="row" id="logo-row">
+                <div class="col">
+                    <a on-hold="onHold()" on-tap="openModal()"><img src="img/owly.png" height="130" width="130"></a>
+                    
+                </div>
+            </div>
+            
+            <h1>Hello, {{userName}}!</h1>
+            <div class="spacer"></div>
+            <h3>February</h3>
+            
+            <div class="row">
+                
+                <div class="progress" id="balance">
+                    <div class="progress-bar progress-bar-success pos" style={{pos_percent}}>
+                        ${{pos}}                    </div>
+                    <div class="progress-bar progress-bar-warning progress-bar neg" style={{neg_percent}}>
+                        ${{neg}}
+                    </div>
+                    
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="spacer"></div>
+        
+        <div class="section" id="goals">
+            <h1>Goals</h1>
+            <div class="row">
+                
+                <div class="col" ng-repeat="goal in goals">
+                    
+                    <p>{{goal.title}}</p>
+                    
+                    <canvas id="pie" class="chart chart-doughnut"
+                        chart-data="data1" chart-labels="labels1">
+                    </canvas>
+                    
+                    <div class="donut-inner">
+                        <h4>47k / 60k </h4>
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            
+        </div>
+        
+        
+        
+    </ion-content>
+</ion-view>
