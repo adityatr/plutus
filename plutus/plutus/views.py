@@ -8,6 +8,8 @@ import json
 import money.models as modelz
 import fuckit
 import datetime
+import subprocess
+import urllib
 
 def auth_sess(session_key):
     session = Session.objects.get(session_key=session_key)
@@ -35,7 +37,7 @@ def whoami(request):
     return HttpResponse(request.user.username)
     
 def progressbar2(request):
-
+  
     if auth_sess(request.GET['sessionid']).is_authenticated():
         
         ret = {}
@@ -68,7 +70,7 @@ def progressbar(request):
                 
         percent = 0.5
         with fuckit:
-            percent = credits / (credits + debits)
+            percent = debits / (credits + debits)
         
         ret = {}
         
@@ -102,3 +104,72 @@ def progressbar(request):
             ret['month'] = "December"
         
         return HttpResponse(json.dumps(ret))
+        
+        
+def initiateChat(request):
+    
+    user = auth_sess(request.GET['sessionid'])
+
+    if user.is_authenticated():
+        response = subprocess.Popen("sh /home/ubuntu/workspace/plutus/plutus/chat1.sh", shell=True, stdout=subprocess.PIPE).stdout.read()
+    
+        response_dict = json.loads(response)
+    
+        dialog_id = response_dict['dialogs'][0]['dialog_id']
+    
+        dialog_id = str(dialog_id)
+    
+        x = "curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: application/json' --header 'Authorization: Basic NjEwODhjNTQtY2E0Ny00N2Q2LWJkOWEtYjcyMGU1NzdhZTE2OjhFRDlyZFhiaXo4dg==' -d 'input=*' 'https://watson-api-explorer.mybluemix.net/dialog/api/v1/dialogs/74241df6-1e5f-4057-a838-143db2d45985/conversation'"
+
+
+        results = subprocess.Popen(x, shell=True, stdout=subprocess.PIPE).stdout.read()     
+
+        results = json.loads(results)
+
+        conversation_id = results['conversation_id']
+        client_id = results['client_id']
+        
+    
+        #remove existing tokens for user
+    
+        modelz.ChatTokens.objects.all().filter(fk_to_user=user.id).delete()
+        
+        ct = modelz.ChatTokens()
+        
+        ct.fk_to_user = user
+        ct.dialog_id = dialog_id
+        ct.conversation_id = conversation_id
+        ct.client_id = client_id
+        ct.save()
+        
+        
+        return HttpResponse(status=200)
+        
+def message(request):
+    user = auth_sess(request.GET['sessionid'])
+
+    if user.is_authenticated():
+        
+        tokenz = modelz.ChatTokens.objects.get(fk_to_user=user.id)
+        
+        dialog_id = tokenz.dialog_id
+        conversation_id = tokenz.conversation_id
+        client_id = tokenz.client_id
+        
+        
+        message = request.GET['message']
+        message = urllib.quote(message)
+        
+        x = "curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: application/json' --header 'Authorization: Basic NjEwODhjNTQtY2E0Ny00N2Q2LWJkOWEtYjcyMGU1NzdhZTE2OjhFRDlyZFhiaXo4dg==' -d 'conversation_id="+conversation_id+"&client_id="+client_id+"&input="+message+"' 'https://watson-api-explorer.mybluemix.net/dialog/api/v1/dialogs/74241df6-1e5f-4057-a838-143db2d45985/conversation'"
+        x = str(x)
+        
+        results = subprocess.Popen(x, shell=True, stdout=subprocess.PIPE).stdout.read()     
+        
+        results = json.loads(results)
+
+        response = ""
+        
+        with fuckit: 
+            response = results['response']
+
+        return HttpResponse(response)

@@ -80,3 +80,46 @@ def get_banks(request):
         return HttpResponse(status=503)
     
 
+def get_categories(request):
+    user =auth(request.GET['sessionid']);
+
+    if user.is_authenticated():
+        ret = {}
+        
+        objs = models.MintTransaction.objects.all()
+        
+        for x in objs: 
+            
+            if str(x.category) in ret.keys():
+                ret[str(x.category)] = str(float(ret[str(x.category)]) + float(x.amount))
+            else:
+                ret[str(x.category)] = str(x.amount)
+            
+            
+    return HttpResponse(json.dumps(ret))
+    
+def get_budget(request):
+    
+    user =auth(request.GET['sessionid']);
+    
+    budget = models.Budget.objects.all().get(fk_to_user=user.id)
+    
+
+    return HttpResponse(budget.budget);
+    
+    
+def save_budget(request):
+    
+    user =auth(request.GET['sessionid']);
+    
+    models.Budget.objects.all().filter(fk_to_user=user.id).delete()
+    
+    budget = models.Budget()
+    
+    
+    budget.fk_to_user = user
+    budget.budget = request.GET['budget']
+    budget.save()
+    
+    
+    return HttpResponse(status=200);

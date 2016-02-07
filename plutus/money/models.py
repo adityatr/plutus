@@ -60,4 +60,14 @@ class MintTransaction(models.Model):
     acc_name = models.CharField(max_length=30)
     
 
+class Budget(models.Model):
+    fk_to_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    budget = models.IntegerField(default=500)
     
+
+class ChatTokens(models.Model):
+    fk_to_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    dialog_id = models.CharField(max_length=30)
+    conversation_id = models.CharField(max_length=30)
+    client_id = models.CharField(max_length=30)

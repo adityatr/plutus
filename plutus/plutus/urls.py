@@ -23,7 +23,14 @@ urlpatterns = [
     url(r'^auth$', views.auth),
     url(r'^money/', include('money.urls')),
     url(r'^whoami$', views.whoami),
+    url(r'^friend/',include('friendship.urls')),
     url(r'^progressbar$', views.progressbar),
     url(r'^goals/', include('goals.urls')),
     url(r'^recco/', include('recco.urls')),
+    url(r'^social/', include('social.urls')),
+    url(r'^initiateChat/', views.initiateChat),
+    url(r'^message/', views.message),
+
+
+    
 ]

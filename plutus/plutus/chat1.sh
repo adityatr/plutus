@@ -1,0 +1,1 @@
+curl -X GET --header 'Accept: application/json' --header 'Authorization: Basic NjEwODhjNTQtY2E0Ny00N2Q2LWJkOWEtYjcyMGU1NzdhZTE2OjhFRDlyZFhiaXo4dg==' 'https://watson-api-explorer.mybluemix.net/dialog/api/v1/dialogs'
