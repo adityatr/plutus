@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'alerts',
     'money',
     'social',
+    'friendship'
     
 ]
 
@@ -128,3 +129,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 SESSION_COOKIE_DOMAIN="localhost"
+
+DATE_INPUT_FORMATS = ('%d/$m/%Y')

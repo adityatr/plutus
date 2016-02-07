@@ -3,11 +3,20 @@ from django.http import HttpResponse
 import json
 import models
 import fuckit
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 # Create your views here.
+def auth(session_key):
+    session = Session.objects.get(session_key=session_key)
+    uid = session.get_decoded().get('_auth_user_id')
+    user = User.objects.get(pk=uid)
+    return user;
+
+
 def store_transactions(request):
     
-    if request.user.is_authenticated():
+    if auth(request.GET['sessionid']).is_authenticated():
         if request.method == 'POST':
             array = json.loads(request.body)['transaction']
                     
@@ -48,10 +57,12 @@ def store_transactions(request):
             return HttpResponse("done")
 
 def get_banks(request):
+    
+    user =auth(request.GET['sessionid']);
 
-    if request.user.is_authenticated():
+    if user.is_authenticated():
 
-            b = models.BankAccount.objects.all().filter(primary_key=request.user.id)
+            b = models.BankAccount.objects.all().filter(primary_key=user.id)
             
             ret = {}
             
@@ -63,8 +74,9 @@ def get_banks(request):
                 ret["bank" + str(x.id)]['balance'] = str(x.balance)
                 ret["bank" + str(x.id)]['credit'] = str(x.credit)
                 ret["bank" + str(x.id)]['debit'] = str(x.debit)
+                
             return HttpResponse(json.dumps(ret))
-    return HttpResponse(status=500)
+    else:
+        return HttpResponse(status=503)
     
-            
-            
+

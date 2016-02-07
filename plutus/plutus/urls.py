@@ -23,4 +23,7 @@ urlpatterns = [
     url(r'^auth$', views.auth),
     url(r'^money/', include('money.urls')),
     url(r'^whoami$', views.whoami),
+    url(r'^progressbar$', views.progressbar),
+    url(r'^goals/', include('goals.urls')),
+    url(r'^recco/', include('recco.urls')),
 ]
